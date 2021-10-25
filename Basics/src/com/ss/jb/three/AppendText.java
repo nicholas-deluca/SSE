@@ -13,6 +13,8 @@ public class AppendText {
 				PrintWriter pw = new PrintWriter(bw);
 				
 				pw.println("This file was edited by a Java application.");
+				pw.flush();
+				pw.close();
 			}
 			catch (IOException e) {
 				System.err.println("IOException Encountered");
