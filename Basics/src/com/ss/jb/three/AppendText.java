@@ -1,3 +1,6 @@
+/**
+ * This program appends a message to an existing file specified at the command line
+ */
 package com.ss.jb.three;
 
 import java.io.*;
