@@ -8,25 +8,6 @@ import java.time.*;
 
 public class DateTimeOps {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		LocalDate bday = LocalDate.now();
-		System.out.print(bday.getDayOfWeek());
-		DateTimeOps d = new DateTimeOps();
-		bday = bday.withDayOfMonth(23);
-		System.out.println(d.lastThurs(bday).toString());
-		bday = LocalDate.of(2019, 1, 1);
-		System.out.println(bday.toString());
-		int [] l = d.monthLengths(2020);
-		for (int i: l) {
-			System.out.println(i);
-		}
-		d.allMondays(10);
-		System.out.println(d.friThirteen(bday));
-		bday = LocalDate.of(2020, 11, 13);
-		System.out.println(d.friThirteen(bday));
-	}
-
 	public LocalDate lastThurs(LocalDate date) {
 		int weekday = date.getDayOfWeek().getValue();
 		if (weekday < 4) {

@@ -29,7 +29,7 @@ public class LambdaSorts {
 	
 	public LambdaSortsInt eFirst () {
 		LambdaSortsInt srt = (lst) -> {
-			Arrays.sort(lst, (a,b) -> a.toLowerCase().contains("e")? -1:1);
+			Arrays.sort(lst, (a,b) -> a.toLowerCase().contains("e")? (b.toLowerCase().contains("e")? 0:-1):1);
 		};
 		return srt;
 	}
