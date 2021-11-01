@@ -1,0 +1,69 @@
+1.
+
+SELECT tbl_book_copies.noOfCopies
+FROM tbl_library_branch
+LEFT JOIN tbl_book_copies
+ON tbl_library_branch.branchId = tbl_book_copies.branchId
+LEFT JOIN tbl_book
+ON tbl_book_copies.bookId = tbl_book.bookId
+WHERE branchName="Sharpstown" AND title="The Lost Tribe";
+
+2.
+
+SELECT tbl_library_branch.branchName, tbl_book_copies.noOfCopies
+FROM tbl_library_branch
+LEFT JOIN tbl_book_copies
+ON tbl_library_branch.branchId = tbl_book_copies.branchId
+LEFT JOIN tbl_book
+ON tbl_book_copies.bookId = tbl_book.bookId
+WHERE title="The Lost Tribe";
+
+3.
+
+SELECT name
+FROM tbl_borrower
+WHERE NOT EXISTS
+(SELECT * FROM tbl_book_loans WHERE tbl_book_loans.cardNo=tbl_borrower.cardNo);
+
+4.
+
+SELECT title,name,address
+FROM tbl_book_loans
+LEFT JOIN tbl_library_branch
+ON tbl_book_loans.branchId=tbl_library_branch.branchId
+LEFT JOIN tbl_book
+ON tbl_book_loans.bookId=tbl_book.bookId
+LEFT JOIN tbl_borrower
+ON tbl_book_loans.cardNo=tbl_borrower.cardNo
+WHERE tbl_library_branch.branchName="Sharpstown"
+AND CAST(dueDate AS Date)=current_date();
+
+5.
+
+SELECT branchName,COUNT(*) as totalLoaned
+FROM tbl_book_loans
+LEFT JOIN tbl_library_branch
+ON tbl_book_loans.branchId=tbl_library_branch.branchId
+GROUP BY tbl_book_loans.branchId;
+
+6.
+
+SELECT name,address,COUNT(*) as totalBorrowed
+FROM tbl_book_loans
+LEFT JOIN tbl_borrower
+ON tbl_book_loans.cardNo=tbl_borrower.cardNo
+GROUP BY tbl_borrower.cardNo
+HAVING COUNT(*)>5;
+
+7.
+
+SELECT tbl_book.title,tbl_book_copies.noOfCopies
+FROM tbl_book_copies
+LEFT JOIN tbl_book
+ON tbl_book_copies.bookId=tbl_book.bookId
+LEFT JOIN tbl_author
+ON tbl_book.authId=tbl_author.authorId
+LEFT JOIN tbl_library_branch
+ON tbl_book_copies.branchId=tbl_library_branch.branchId
+WHERE tbl_author.authorName="Stephen King"
+AND tbl_library_branch.branchName="Central";
